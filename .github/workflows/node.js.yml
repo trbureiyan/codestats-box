@@ -31,4 +31,4 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.TOKEN }}
       GIST_ID: ${{ secrets.GIST_ID }}
-      CODESTATS_USER: trbureiyan
+      CODESTATS_USER: ${{ secrets.CODESTATS_USER }}
