@@ -46,3 +46,5 @@ jobs:
         GH_TOKEN: ${{ secrets.TOKEN }}
         GIST_ID: ${{ secrets.GIST_ID }}
         CODESTATS_USER: ${{ secrets.CODESTATS_USER }}
+
+## GG nunca he usado node
