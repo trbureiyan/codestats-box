@@ -7,28 +7,34 @@ on:
   push:
     branches: [ master ]
   schedule:
-  - cron: "0 10 * * 2-5"
+    - cron: "0 10 * * 2-5"
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [14.x, 16.x, 18.x]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
-    - run: npm install
-    - run: npm run start
+    - name: Clean install dependencies
+      run: npm ci
 
-    env:
-      GH_TOKEN: ${{ secrets.TOKEN }}
-      GIST_ID: ${{ secrets.GIST_ID }}
-      CODESTATS_USER: ${{ secrets.CODESTATS_USER }}
+    - name: Build project
+      run: npm run build
+
+    - name: Run tests
+      run: npm test
+      env:
+        GH_TOKEN: ${{ secrets.TOKEN }}
+        GIST_ID: ${{ secrets.GIST_ID }}
+        CODESTATS_USER: ${{ secrets.CODESTATS_USER }}
