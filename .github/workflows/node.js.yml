@@ -29,6 +29,6 @@ jobs:
     - run: npm run start
 
     env:
-      GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      GH_TOKEN: ${{ secrets.TOKEN }}
       GIST_ID: daf57c589aeb70813dbdddc76bf83571
       CODESTATS_USER: Anc
